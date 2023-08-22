@@ -1,0 +1,10 @@
+use("insidencias-pruebas");
+
+db.reportesInsidencias.insertOne({
+  categoria: "leve",
+  tipo_De_Insidencia: "Hardware",
+  fechaReporte: new Date("2023-08-22T10:00:00Z"),
+  Area: "corvus",
+  Lugar: "esta",
+  reportante: "Juan",
+});

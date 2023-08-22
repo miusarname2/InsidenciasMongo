@@ -1,6 +1,7 @@
 import express from "express";
-import { index } from "./Middleware/index.js";
 import dotenv from "dotenv";
+import morgan from "morgan";
+import { reports } from "./routes/reports.routes.js";
 
 //Enviroment variables
 dotenv.config();
@@ -16,9 +17,9 @@ index.use(morgan("dev"))
 index.use(express.json())
 
 //Routes
-
+index.use("/reportsAll", reports);
 
 //Server
-index.listen(app.get("port"), () => {
-  console.log("server on port " + app.get("port"));
+index.listen(index.get("port"), () => {
+  console.log("server on port " + index.get("port"));
 });

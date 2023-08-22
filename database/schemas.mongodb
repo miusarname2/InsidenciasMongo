@@ -1,30 +1,108 @@
 use("insidencias-pruebas");
 
 db.createCollection("reportesInsidencias", {
-    validator: {
-      $jsonSchema: {
-        bsonType: "object",
-        additionalProperties: false,
-        required:["categoria","tipo_De_Insidencia","fechaReporte","Area","Lugar"],
-        properties: {
-          _id: { bsonType: "objectId" },
-          categoria: { bsonType: "string", description: "categoria is required" },
-          tipo_De_Insidencia: { bsonType: "string", description: "tipo_De_Insidencia is required" },
-          fechaReporte: { bsonType: "string", description: "fechaReporte is required" },
-          Area: { bsonType: "string", description: "Area is required" },
-          Lugar: { bsonType: "string", description: "Lugar is required" },
-        }
-      }
-    }
-  });
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      additionalProperties: false,
+      required: [
+        "categoria",
+        "tipo_De_Insidencia",
+        "fechaReporte",
+        "Area",
+        "Lugar",
+        "reportante",
+      ],
+      properties: {
+        _id: { bsonType: "objectId" },
+        categoria: {
+          bsonType: "string",
+          description: "categoria is required",
+          enum: ["leve", "moderada", "critica"],
+        },
+        tipo_De_Insidencia: {
+          bsonType: "string",
+          description: "tipo_De_Insidencia is required",
+          enum: ["Hardware", "software"],
+        },
+        fechaReporte: {
+          bsonType: "date",
+          description: "fechaReporte is required",
+        },
+        Area: {
+          bsonType: "string",
+          description: "Area is required",
+          enum: ["corvus", "endor", "skylab", "sputnik", "artemis", "apolo"],
+        },
+        Lugar: {
+          bsonType: "string",
+          description: "Lugar is required",
+        },
+        reportante: {
+          bsonType: "string",
+          description: "reportante is required and must be a valid user",
+        },
+      },
+    },
+  },
+});
 
-  use("insidencias-pruebas");
+db.createCollection("Trainer", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      additionalProperties: false,
+      required: [
+        "nombre",
+        "emailPersonal",
+        "emailCorporativo",
+        "TelefonoMovil",
+        "TelefonoResidencia",
+        "TelefonoEmpresa",
+        "TelefonoMovilEmpresa",
+      ],
+      properties: {
+        _id: { bsonType: "objectId" },
+        nombre: {
+          bsonType: "string",
+          description: "nombre is required",
+        },
+        emailPersonal: {
+          bsonType: "string",
+          description: "emailPersonal is required",
+        },
+        emailCorporativo: {
+          bsonType: "string",
+          description: "Area is required",
+        },
+        TelefonoMovil: {
+          bsonType: "int",
+          description: "TelefonoMovil is required",
+        },
+        TelefonoResidencia: {
+          bsonType: "int",
+          description: "TelefonoResidencia is required",
+        },
+        TelefonoEmpresa: {
+          bsonType: "int",
+          description: "TelefonoEmpresa is required",
+        },
+        TelefonoMovilEmpresa: {
+          bsonType: "int",
+          description: "TelefonoMovilEmpresa is required",
+        },
+      },
+    },
+  },
+});
+
+use("insidencias-pruebas");
 
 db.reportesInsidencias.insertOne({
-  categoria:"Software",
-  tipo_De_Insidencia:"uwu",
-  fechaReporte:"hoy",
-  Area:"aca",
-  Lugar:"este"
-})
-
+  categoria: "leve",
+  tipo_De_Insidencia: "Hardware",
+  fechaReporte: new Date("2023-08-22T10:00:00Z"),
+  Area: "corvus",
+  Lugar: "esta",
+  reportante: "Juan",
+});

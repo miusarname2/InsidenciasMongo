@@ -1,0 +1,30 @@
+use("insidencias-pruebas");
+
+db.createCollection("reportesInsidencias", {
+    validator: {
+      $jsonSchema: {
+        bsonType: "object",
+        additionalProperties: false,
+        required:["categoria","tipo_De_Insidencia","fechaReporte","Area","Lugar"],
+        properties: {
+          _id: { bsonType: "objectId" },
+          categoria: { bsonType: "string", description: "categoria is required" },
+          tipo_De_Insidencia: { bsonType: "string", description: "tipo_De_Insidencia is required" },
+          fechaReporte: { bsonType: "string", description: "fechaReporte is required" },
+          Area: { bsonType: "string", description: "Area is required" },
+          Lugar: { bsonType: "string", description: "Lugar is required" },
+        }
+      }
+    }
+  });
+
+  use("insidencias-pruebas");
+
+db.reportesInsidencias.insertOne({
+  categoria:"Software",
+  tipo_De_Insidencia:"uwu",
+  fechaReporte:"hoy",
+  Area:"aca",
+  Lugar:"este"
+})
+

@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import passport from "passport";
+import { limitGrt } from "./config/limiter.js";
 import { crearToken, validarToken } from "./config/JWT.js";
 import { reports } from "./routes/reports.routes.js";
 import { campers } from "./routes/campers.routes.js";
@@ -19,6 +20,7 @@ index.set("port", process.env.PORT || 3000);
 // Middlewares
 index.use(morgan("dev"));
 index.use(express.json());
+index.use(limitGrt());
 index.use(passport.initialize());
 
 // Routes

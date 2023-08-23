@@ -1,6 +1,6 @@
 use("insidencias-pruebas");
 
-db.createCollection("reportesInsidencias", {
+db.createCollection("reportes", {
   validator: {
     $jsonSchema: {
       bsonType: "object",

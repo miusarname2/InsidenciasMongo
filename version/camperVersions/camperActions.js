@@ -3,22 +3,30 @@ import { con } from "../../config/atlas.js";
 export async function reportCamper(req, res) {
   const db = await con();
   const reportesInsidencias = db.collection("reportesInsidencias");
+
   try {
-    const Trainer = db.collection("Trainer");
-    const trainer = Trainer.findOne({ nombre: req.body.reportante });
-    console.log(trainer);
+    // En lugar de modificar directamente req.body.fechaReporte,
+    // se crea un nuevo objeto para evitar cambios no deseados.
+    const reporte = {
+      ...req.body,
+      fechaReporte: new Date(req.body.fechaReporte),
+    };
+
+    const trainer = await db
+      .collection("Trainer")
+      .findOne({ nombre: reporte.reportante });
+
     if (trainer) {
-      var result = await reportesInsidencias.insertOne(req.body);
+      const result = await reportesInsidencias.insertOne(reporte);
+      res.send(result);
     } else {
-      req.body.reportante = `<camper>${reporte.reportante}`;
-      var result = await reportesInsidencias.insertOne(req.body);
-    }
-    if (result.insertedId) {
-      res.status(201).send("Enhorabuena,has creado un reporte");
-    }else{
-      res.status(400).send("Algo paso, intenta nuevamente");
+      // Agregar "<camper>" antes del contenido original
+      reporte.reportante = `<camper>${reporte.reportante}`;
+      const result = await reportesInsidencias.insertOne(reporte);
+      res.send(result);
     }
   } catch (error) {
-    console.log("algo paso...", error);
+    console.log("Algo salió mal...", error);
+    res.status(500).send("Error en el servidor");
   }
 }

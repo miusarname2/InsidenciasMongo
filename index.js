@@ -1,29 +1,39 @@
 import express from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
+import passport from "passport";
+import { crearToken, validarToken } from "./config/JWT.js";
 import { reports } from "./routes/reports.routes.js";
 import { campers } from "./routes/campers.routes.js";
 import { Trainers } from "./routes/trainers.routes.js";
 
-//Enviroment variables
+// Environment variables
 dotenv.config();
 
-//initilize server
+// Initialize server
 const index = express();
 
-//setting
+// Setting
 index.set("port", process.env.PORT || 3000);
 
-//Middlewares
+// Middlewares
 index.use(morgan("dev"));
 index.use(express.json());
+index.use(passport.initialize());
 
-//Routes
-index.use("/admin", reports);
-index.use("/camper", campers);
-index.use("/trainer", Trainers);
+// Routes
+index.use("/token", crearToken);
 
-//Server
+// Rutas para admin (permisos de acceso: admin)
+index.use("/admin", validarToken, reports);
+
+// Rutas para camper (permisos de acceso: camper)
+index.use("/camper", validarToken, campers);
+
+// Rutas para trainer (permisos de acceso: trainer)
+index.use("/trainer", validarToken, Trainers);
+
+// Server
 index.listen(index.get("port"), () => {
-  console.log("server on port " + index.get("port"));
+  console.log("Server on port " + index.get("port"));
 });

@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import passport from "passport";
+import routesVersioning from "express-routes-versioning";
 import { limitGrt } from "./config/limiter.js";
 import { crearToken, validarToken } from "./config/JWT.js";
 import { reports } from "./routes/reports.routes.js";
@@ -13,6 +14,7 @@ dotenv.config();
 
 // Initialize server
 const index = express();
+const version = routesVersioning();
 
 // Setting
 index.set("port", process.env.PORT || 3000);
@@ -27,13 +29,32 @@ index.use(passport.initialize());
 index.use("/token", crearToken);
 
 // Rutas para admin (permisos de acceso: admin)
-index.use("/admin", validarToken, reports);
+index.use(
+  "/admin",
+  validarToken,
+  version({
+    "1.0.0": reports,
+  })
+);
 
 // Rutas para camper (permisos de acceso: camper)
-index.use("/camper", validarToken, campers);
+index.use(
+  "/camper",
+  validarToken,
+  version({
+    "2.0.0": campers,
+  })
+);
 
 // Rutas para trainer (permisos de acceso: trainer)
-index.use("/trainer", validarToken, Trainers);
+index.use(
+  "/trainer",
+  validarToken,
+  Trainers,
+  version({
+    "3.0.0": Trainers,
+  })
+);
 
 // Server
 index.listen(index.get("port"), () => {

@@ -8,3 +8,14 @@ db.reportesInsidencias.insertOne({
   Lugar: "esta",
   reportante: "Juan",
 });
+
+use("insidencias-pruebas");
+db.Trainer.insertOne({
+  nombre: "a",
+  emailPersonal:"a",
+  emailCorporativo:"a",
+  TelefonoMovil:1,
+  TelefonoResidencia:2,
+  TelefonoEmpresa:3,
+  TelefonoMovilEmpresa:4,
+});

@@ -1,13 +1,6 @@
 import { Router } from "express";
-import { con } from "../config/atlas.js";
+import { allReports } from "../version/Admin/AdminActions.js";
 
 export const reports = Router();
 
-reports.get("/", async (req, res) => {
-  const db = await con();
-  const reportesInsidencias = db.collection("reportesInsidencias");
-  const result = await reportesInsidencias
-    .find()
-    .toArray();
-  res.send(result);
-});
+reports.get("/reportsAll", allReports);

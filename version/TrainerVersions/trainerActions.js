@@ -2,7 +2,7 @@ import { con } from "../../config/atlas.js";
 
 export async function reportTrainer(req, res, next) {
   const db = await con();
-  const reportesInsidencias = db.collection("reportes");
+  const reportesInsidencias = db.collection("reportesInsidencias");
   req.body.fechaReporte = new Date (req.body.fechaReporte)
   try {
     var result = await reportesInsidencias.insertOne(req.body);

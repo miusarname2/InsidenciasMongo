@@ -33,7 +33,8 @@ index.use(
   "/admin",
   validarToken,
   version({
-    "1.0.0": reports,
+    "3.0.0": reports,
+    fallbackVersion: "2.0.0" 
   })
 );
 
@@ -43,6 +44,7 @@ index.use(
   validarToken,
   version({
     "2.0.0": campers,
+    fallbackVersion: "2.0.0" 
   })
 );
 
@@ -50,9 +52,9 @@ index.use(
 index.use(
   "/trainer",
   validarToken,
-  Trainers,
   version({
-    "3.0.0": Trainers,
+    "1.0.0": Trainers,
+    fallbackVersion: "2.0.0" 
   })
 );
 

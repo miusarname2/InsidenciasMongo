@@ -92,14 +92,11 @@ Authorization: Bearer <TU_TOKEN>
 
 ## Versiones de API
 
-La aplicación utiliza diferentes versiones de la API para agrupar las funciones específicas de cada rol. Las versiones se manejan a través de los headers de las solicitudes, utilizando el header "Accept-Version" con los siguientes valores: "1.0.0", "2.0.0" y "3.0.0", correspondientes a las versiones v1, v2 y v3 respectivamente.
+La aplicación utiliza diferentes versiones de la API para agrupar las funciones específicas de cada rol. Asegúrate de incluir la versión adecuada en las URL de las solicitudes.
 
-Asegúrate de incluir el header "Accept-Version" con el valor adecuado en las solicitudes para acceder a las funcionalidades específicas de cada versión.
-
-- **Camper API:** `/camper`
-- **Trainer API:** `/trainer`
-- **Admin API:** `/admin`
-
+- **Camper API:** `/v1/campers`
+- **Trainer API:** `/v1/trainers`
+- **Admin API:** `/v1/admin`
 
 ## Notas Finales
 
@@ -203,3 +200,112 @@ npm run dev
 
    Asegúrate de ajustar los valores en el cuerpo de la solicitud según tus necesidades.
 
+
+# **Version Divertida & Explicita**
+
+# ⚙️ Sistema de Gestión de Incidencias - Documentación 🛠️
+
+El Sistema de Gestión de Incidencias es como un superhéroe para tus problemas técnicos. ¡Aprende a usarlo como un profesional!
+
+![Incidencias](url_de_la_imagen)
+
+## 🚀 Características
+
+- **Autenticación a prueba de balas:** Utiliza tokens mágicos (JSON Web Tokens) para entrar al mundo de la resolución de incidencias.
+- **¡Detén el abuso!:** Controla el tráfico con un escudo anti-spam para que todos sean felices.
+- **Rutas para todos:** Camper, Trainer o Admin, hay algo para cada héroe.
+- **Gestiona, reporta, conquista:** Registra tus proezas y desafíos para dominar el reino de las incidencias.
+
+## 🛠️ Instalación
+
+1. 📥 Clona este repo: `git clone <URL_DEL_REPOSITORIO>`
+2. 🚀 Navega hasta el directorio: `cd <NOMBRE_DEL_DIRECTORIO>`
+3. 🧙‍♂️ Lanza un hechizo: `npm install`
+
+## 🎟️ Obtener Tokens de Acceso
+
+¡Consigue tu pase mágico antes de aventurarte!
+
+1. ✨ Dirígete al sendero `/crear` con un hechizo **POST**, proporciona tu rol (`admin`, `camper` o `trainer`).
+2. 🔮 ¡Un token mágico aparecerá! Validez de 1 hora.
+3. 🗝️ Lleva este token contigo en la cabecera `Authorization`.
+
+## ⚔️ Acceso a las Rutas Protegidas
+
+Con tu token mágico en mano, ¡explora los reinos protegidos!
+
+1. 🧙‍♂️ Añade el token en la cabecera:
+```
+Authorization: Bearer <TU_TOKEN>
+```
+
+### Rutas para Camper 🏕️
+
+- **Reporta tu hazaña:** Envía un mensaje en una botella con un hechizo **POST** a `/reportar`.
+
+### Rutas para Trainer 🏋️‍♀️
+
+- **Reporta tu hazaña:** Usa el hechizo **GET** en `/reportar` para ver los informes.
+
+- **Crea nuevos héroes:** Con un hechizo **POST** en `/crear`, invoca a un nuevo Trainer.
+
+### Rutas para Admin 🧙
+
+- **¡Ver todos los informes!** Con un hechizo **GET** en `/reportsAll`, observa todos los informes almacenados.
+
+## ✉️ Cuerpo de las Consultas
+
+### Crea tu Reporte Épico (Camper) 📋
+
+```json
+{
+  "categoria": "leve",
+  "tipo_De_Insidencia": "Hardware",
+  "fechaReporte": "2023-08-23T10:00:00Z",
+  "Area": "corvus",
+  "Lugar": "Sala 101",
+  "reportante": "nombre_del_reportante"
+}
+```
+
+### Crea tu Reporte Épico (Trainer) 🏋️‍♀️
+
+```json
+{
+  "categoria": "moderada",
+  "tipo_De_Insidencia": "Software",
+  "fechaReporte": "2023-08-23T12:00:00Z",
+  "Area": "endor",
+  "Lugar": "Oficina 202",
+  "reportante": "nombre_del_reportante"
+}
+```
+
+### Crea un Nuevo Héroe/Trainer 🌟
+
+```json
+{
+  "nombre": "Nombre del Trainer",
+  "emailPersonal": "correo_personal@example.com",
+  "emailCorporativo": "correo_corporativo@example.com",
+  "TelefonoMovil": 123456789,
+  "TelefonoResidencia": 987654321,
+  "TelefonoEmpresa": 555555555,
+  "TelefonoMovilEmpresa": 999999999
+}
+
+```
+
+## 🗺️ Versiones de API
+
+La aplicación tiene diferentes versiones de API, como niveles en un juego. Usa el encantamiento "Accept-Version" en tus headers con estos valores: "1.0.0", "2.0.0" y "3.0.0" para las versiones v1, v2 y v3.
+
+Usa el header "Accept-Version" en tus solicitudes para abrir la puerta a diferentes funciones:
+
+- **Camper API:** `/camper`
+- **Trainer API:** `/trainer`
+- **Admin API:** `/admin`
+
+## 🧙‍♂️ Notas Finales
+
+¡Este libro de hechizos te ha proporcionado un mapa para dominar la Gestión de Incidencias! ¡No dudes en explorar más a fondo y convertirte en el maestro de las incidencias!

@@ -92,11 +92,14 @@ Authorization: Bearer <TU_TOKEN>
 
 ## Versiones de API
 
-La aplicación utiliza diferentes versiones de la API para agrupar las funciones específicas de cada rol. Asegúrate de incluir la versión adecuada en las URL de las solicitudes.
+La aplicación utiliza diferentes versiones de la API para agrupar las funciones específicas de cada rol. Las versiones se manejan a través de los headers de las solicitudes, utilizando el header "Accept-Version" con los siguientes valores: "1.0.0", "2.0.0" y "3.0.0", correspondientes a las versiones v1, v2 y v3 respectivamente.
 
-- **Camper API:** `/v1/campers`
-- **Trainer API:** `/v1/trainers`
-- **Admin API:** `/v1/admin`
+Asegúrate de incluir el header "Accept-Version" con el valor adecuado en las solicitudes para acceder a las funcionalidades específicas de cada versión.
+
+- **Camper API:** `/camper`
+- **Trainer API:** `/trainer`
+- **Admin API:** `/admin`
+
 
 ## Notas Finales
 
